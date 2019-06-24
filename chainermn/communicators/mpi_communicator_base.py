@@ -622,7 +622,7 @@ class MpiCommunicatorBase(communicator_base.CommunicatorBase):
     def bcast_data(self, model):
         for _, param in sorted(model.namedparams()):
             if param.data is not None:
-                data = param.data
+                data = backends.from_chx(param.data)
                 is_float16 = param.data.dtype == numpy.float16
                 if is_float16:
                     data = data.astype(numpy.float32)
